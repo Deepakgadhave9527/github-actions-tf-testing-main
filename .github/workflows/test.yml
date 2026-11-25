@@ -1,0 +1,33 @@
+name: cidd workflow
+
+on:
+  push:
+    branches:
+      - main
+      
+  pull_request:
+    branches:
+      - main
+      
+workflow-disptach:
+
+jobs:
+   job-name:
+     runs-on: ubuntu-latest
+     env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: us-east-1
+     
+     step:
+     - name : checkout
+       uses: action\checkout@v3
+       
+     - name : terraform init
+       uses : terrafrom init
+       
+     - name : terraform plan
+       uses : terraform plan
+       
+     - name : terraform apply
+       uses: terraform apply
